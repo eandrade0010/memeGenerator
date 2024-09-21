@@ -9,3 +9,6 @@ bin/*
 lib/*
 pyvenv.cfg
 
+# Pycharm #
+.idea
+pythonProject/*

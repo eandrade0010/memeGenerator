@@ -1,3 +1,5 @@
+"""Provides an IngestorInterface for docx files."""
+
 from typing import List
 import docx
 
@@ -6,11 +8,21 @@ from .QuoteModel import QuoteModel
 
 
 class DOCXIngestor(IngestorInterface):
+    """Strategy object for parsing through DOCX file.
+
+    params: string-like path for file
+    return: List of QuoteModels
+    """
 
     allowed_extensions = ["docx"]
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
+        """Return a boolean flagging whether the file in the path string can be read.
+
+        params: path
+        return: boolean
+        """
         if not cls.can_ingest(path):
             raise Exception("cannot ingest exception")
 

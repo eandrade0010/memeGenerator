@@ -1,3 +1,5 @@
+"""Provides an IngestorInterface for pdf files."""
+
 from typing import List
 import subprocess
 import os
@@ -8,11 +10,20 @@ from .QuoteModel import QuoteModel
 
 
 class PDFIngestor(IngestorInterface):
+    """Strategy object for parsing through PDF file.
+
+    Create temporary .txt file which is subsequently read.
+    """
 
     allowed_extensions = [".pdf"]
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
+        """Return a boolean flagging whether the file in the path string can be read.
+
+        params: path
+        return: boolean
+        """
         if not cls.can_ingest(path):
             raise Exception("Cannot ingest exception")
 
@@ -29,8 +40,3 @@ class PDFIngestor(IngestorInterface):
 
         os.remove(tmp_file)
         return quotes
-
-
-
-
-

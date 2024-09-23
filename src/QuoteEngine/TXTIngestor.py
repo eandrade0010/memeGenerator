@@ -13,7 +13,7 @@ class TXTIngestor(IngestorInterface):
     return: List of QuoteModels
     """
 
-    allowed_extensions = [".txt"]
+    allowed_extensions = ["txt"]
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:

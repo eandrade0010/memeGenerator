@@ -31,7 +31,7 @@ class DOCXIngestor(IngestorInterface):
 
         for para in doc.paragraphs:
             if para.text != "":
-                parse = para.split(" - ")
+                parse = para.text.split(" - ")
                 quotes.append(QuoteModel(parse[0], parse[1]))
 
         return quotes

@@ -15,7 +15,7 @@ class PDFIngestor(IngestorInterface):
     Create temporary .txt file which is subsequently read.
     """
 
-    allowed_extensions = [".pdf"]
+    allowed_extensions = ["pdf"]
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:

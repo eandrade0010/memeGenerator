@@ -20,4 +20,5 @@ class Ingestor(IngestorInterface):
         """Return the appropriate parser from a collection of strategy objects for parsing appropriate file."""
         for ingestor in cls.ingestors:
             if ingestor.can_ingest(path):
+                print(ingestor.parse(path))
                 return ingestor.parse(path)

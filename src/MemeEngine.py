@@ -3,6 +3,8 @@
 from PIL import Image, ImageDraw, ImageFont
 import random
 
+import os
+
 
 class MemeEngine:
     """Class will input an image and a random QuoteModel object and return a meme. """
@@ -70,6 +72,7 @@ class MemeEngine:
 
         # Saving image file
         file_path = f'meme{random.randint(1111, 9999)}.jpeg'
-        img.save(file_path)
+        rel_path = os.path.join(self.image, file_path)
+        img.save(rel_path)
 
-        return file_path
+        return rel_path

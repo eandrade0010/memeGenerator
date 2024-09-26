@@ -12,7 +12,7 @@ class MemeEngine:
         self.image = path
 
     @staticmethod
-    def draw_text(img: Image, body, author, font_size=36):
+    def draw_text(img: Image, body, author, font_size=32):
         """Helper method formats and adds text to image.
 
         :param Image img: The meme image to add text to
@@ -29,18 +29,24 @@ class MemeEngine:
         text_color = (255, 255, 255)
 
         # Positioning of body text
-        text_length = draw.textlength(body, font)
-        pos_x = (img.width - text_length) / 2
+        try:
+            text_length = draw.textlength(body, font)
+            pos_x = (img.width - text_length) / 2
+        except ValueError:
+            pos_x = 0
         pos_y = img.height / 16
 
-        draw.text((pos_x, pos_y), body, fill=text_color, font=font)
+        draw.text((pos_x, pos_y), body.upper(), fill=text_color, font=font)
 
         # Positioning of author text
-        text_length = draw.textlength(author, font)
-        pos_x = (img.width - text_length) / 2
+        try:
+            text_length = draw.textlength(author, font)
+            pos_x = (img.width - text_length) / 2
+        except ValueError:
+            pos_x = 0
         pos_y = 14*(img.height / 16)
 
-        draw.text((pos_x, pos_y), author, fill=text_color, font=font)
+        draw.text((pos_x, pos_y), author.upper(), fill=text_color, font=font)
 
         return img
 

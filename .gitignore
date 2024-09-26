@@ -14,7 +14,8 @@ pyvenv.cfg
 pythonProject/*
 
 # Generated images #
-src/*.jpeg
+src/tmp/*.jpeg
+src/static/*.jpg
 
 # Pycache #
 src/__pycache__/

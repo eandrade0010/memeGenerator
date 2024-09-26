@@ -49,4 +49,4 @@ if __name__ == "__main__":
     parser.add_argument("--path", help="Path of image to meme-ify")
 
     args = parser.parse_args()
-    print(generate_meme(args.path, args.body, args.author))
+    generate_meme(args.path, args.body, args.author)

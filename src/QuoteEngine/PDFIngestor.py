@@ -42,7 +42,6 @@ class PDFIngestor(IngestorInterface):
             line = line.strip('\n\r').strip()
             if len(line) > 0:
                 parse = line.split(' - ')
-                print(parse)
                 quotes.append(QuoteModel(parse[0], parse[1]))
 
         os.remove(tmp_file)

@@ -31,16 +31,16 @@ class MemeEngine:
         # Positioning of body text
         text_length = draw.textlength(body, font)
         pos_x = (img.width - text_length) / 2
-        pos_y = img.height / 4
+        pos_y = img.height / 16
 
         draw.text((pos_x, pos_y), body, fill=text_color, font=font)
 
         # Positioning of author text
         text_length = draw.textlength(author, font)
         pos_x = (img.width - text_length) / 2
-        pos_y = 3*(img.height / 4)
+        pos_y = 14*(img.height / 16)
 
-        draw.text((pos_x, pos_y), body, fill=text_color, font=font)
+        draw.text((pos_x, pos_y), author, fill=text_color, font=font)
 
         return img
 
@@ -57,7 +57,7 @@ class MemeEngine:
 
         # Resizing image
         aspect_ratio = img.size[1] / img.size[0]
-        img = img.resize(width, int(aspect_ratio * width))
+        img = img.resize((width, int(aspect_ratio * width)))
 
         # Adding text
         self.draw_text(img, text, author)

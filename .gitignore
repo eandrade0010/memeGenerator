@@ -12,3 +12,6 @@ pyvenv.cfg
 # Pycharm #
 .idea
 pythonProject/*
+
+# Generated images #
+src/*.jpeg

@@ -15,3 +15,10 @@ pythonProject/*
 
 # Generated images #
 src/*.jpeg
+
+# Pycache #
+src/__pycache__/
+src/QuoteEngine/__pycache__
+
+# DOCX traces #
+docx-template/*

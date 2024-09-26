@@ -15,7 +15,7 @@ pythonProject/*
 
 # Generated images #
 src/tmp/*.jpeg
-src/static/*.jpg
+src/static/*.jpeg
 
 # Pycache #
 src/__pycache__/

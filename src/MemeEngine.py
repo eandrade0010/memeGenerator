@@ -12,7 +12,7 @@ class MemeEngine:
         self.image = path
 
     @staticmethod
-    def draw_text(img, body, author, font_size = 36):
+    def draw_text(img: Image, body, author, font_size=36):
         """Helper method formats and adds text to image.
 
         :param Image img: The meme image to add text to

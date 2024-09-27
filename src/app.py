@@ -2,6 +2,7 @@ import random
 import os
 import requests
 from flask import Flask, render_template, abort, request
+from PIL import Image, UnidentifiedImageError
 
 
 from QuoteEngine import Ingestor
@@ -61,12 +62,18 @@ def meme_post():
     url = request.form.get('image_url')
     image = requests.get(url)
 
-    temp_image = 'temp_image.jpg'
+    temp_image = 'temp_image.jpeg'
     with open(temp_image, 'wb') as img:
         img.write(image.content)
 
     quote = request.form.get('body')
     author = request.form.get('author')
+
+    try:
+        Image.open(temp_image)
+    except UnidentifiedImageError:
+        os.remove(temp_image)
+        abort(415, 'URL provided is not image file')
 
     path = meme.make_meme(temp_image, quote, author)
     os.remove(temp_image)

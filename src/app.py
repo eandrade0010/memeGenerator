@@ -3,8 +3,8 @@ import os
 import requests
 from flask import Flask, render_template, abort, request
 
-# @TODO Import your Ingestor and MemeEngine classes
-from QuoteEngine import QuoteModel, Ingestor
+
+from QuoteEngine import Ingestor
 from MemeEngine import MemeEngine
 
 app = Flask(__name__)
@@ -20,20 +20,16 @@ def setup():
                    './_data/DogQuotes/DogQuotesPDF.pdf',
                    './_data/DogQuotes/DogQuotesCSV.csv']
 
-    # TODO: Use the Ingestor class to parse all files in the
-    # quote_files variable
-    quotes = []
+    quotes_ = []
     for f in quote_files:
-        quotes.extend(Ingestor.parse(f))
+        quotes_.extend(Ingestor.parse(f))
 
     images_path = "./_data/photos/dog/"
-
-    # TODO: Use the pythons standard library os class to find all
     # images within the images images_path directory
     for root, dirs, files in os.walk(images_path):
-        imgs = [os.path.join(root, name) for name in files]
+        imgs_ = [os.path.join(root, name) for name in files]
 
-    return quotes, imgs
+    return quotes_, imgs_
 
 
 quotes, imgs = setup()
@@ -42,11 +38,6 @@ quotes, imgs = setup()
 @app.route('/')
 def meme_rand():
     """ Generate a random meme """
-
-    # @TODO:
-    # Use the random python standard library class to:
-    # 1. select a random image from imgs array
-    # 2. select a random quote from the quotes array
 
     img = random.choice(imgs)
     quote = random.choice(quotes)
@@ -65,7 +56,8 @@ def meme_form():
 def meme_post():
     """ Create a user defined meme """
 
-    # @TODO:
+    if not request.form.get('image_url'):
+        abort(404)
     url = request.form.get('image_url')
     image = requests.get(url)
 

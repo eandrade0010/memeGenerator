@@ -1,6 +1,7 @@
 """Module manipulates and draws text onto images."""
 
 from PIL import Image, ImageDraw, ImageFont
+import textwrap
 import random
 
 import os
@@ -30,25 +31,23 @@ class MemeEngine:
         font = ImageFont.truetype("./assets/impact.ttf", font_size)
         text_color = (255, 255, 255)
 
-        # Positioning of body text
-        try:
-            text_length = draw.textlength(body, font)
-            pos_x = (img.width - text_length) / 2
-        except ValueError:
-            pos_x = 0
-        pos_y = img.height / 16
+        # Positioning and formatting of body text
+        pos_y = img.height/16
+        lines = textwrap.wrap(body, width=35)
+        for line in lines:
+            left, top, right, bottom = font.getbbox(line.upper())
+            width, height = (right - left, bottom - top)
+            draw.text(((img.width - width) / 2, pos_y), line.upper(), font=font, fill=text_color)
+            pos_y += height
 
-        draw.text((pos_x, pos_y), body.upper(), fill=text_color, font=font)
-
-        # Positioning of author text
-        try:
-            text_length = draw.textlength(author, font)
-            pos_x = (img.width - text_length) / 2
-        except ValueError:
-            pos_x = 0
+        # Positioning and formatting of author text
         pos_y = 14*(img.height / 16)
-
-        draw.text((pos_x, pos_y), author.upper(), fill=text_color, font=font)
+        lines = textwrap.wrap(author, width=35)
+        for line in lines:
+            left, top, right, bottom = font.getbbox(line.upper())
+            width, height = (right - left, bottom - top)
+            draw.text(((img.width - width) / 2, pos_y), line.upper(), font=font, fill=text_color)
+            pos_y += height
 
         return img
 
